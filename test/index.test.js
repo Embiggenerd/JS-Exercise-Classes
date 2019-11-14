@@ -181,8 +181,10 @@ describe('Instance of Lambdasian', () => {
 
 describe('Instance of Instructor', () => {
   let instructor
+  let student
   beforeEach(() => {
     instructor = new results.Instructor(instructorAttr)
+    student = new results.Student(studentAttr)
   })
   it('[1] initializes with the given name, age and location', () => {
     expect(instructor.name).to.equal(instructorAttr.name)
@@ -214,6 +216,12 @@ describe('Instance of Instructor', () => {
   })
   it('[9] can grade a student', () => {
     expect(instructor.grade({ name: 'petar' }, 'redux')).to.include('redux', 'petar');
+  })
+  it('[10] can change the grade of a student', () => {
+    const oldGrade = student.grade
+    const amount = 20
+    instructor.changeGrade(student, amount)
+    expect(Math.abs(oldGrade - student.grade)).to.eq(amount)
   })
 })
 
@@ -262,6 +270,9 @@ describe('Instances of Student', () => {
   it('[11] can do a sprintChallenge correctly', () => {
     expect(student.sprintChallenge('sql')).to.include(studentAttr.name);
     expect(student.sprintChallenge('sql')).to.include('sql');
+  })
+  it('[12] has grade property', () => {
+    expect(student.grade).to.not.be.undefined;
   })
 })
 
