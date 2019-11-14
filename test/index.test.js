@@ -274,6 +274,12 @@ describe('Instances of Student', () => {
   it('[12] has grade property', () => {
     expect(student.grade).to.not.be.undefined;
   })
+  it('[13 graduates only if grade above 70', () =>{
+    student.grade = 80
+    expect(student.graduate()).to.be.true
+    student.grade = 50
+    expect(student.graduate()).to.be.false
+  })
 })
 
 describe('Instance of ProjectManager', () => {
